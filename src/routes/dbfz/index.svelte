@@ -1,71 +1,65 @@
 <svelte:head>
-<link rel="stylesheet" href="https://rogueyoshi.com/dbfz-css/dbfz.css">
-  <link rel="stylesheet" href="overlay.css">
+  <!--link rel="stylesheet" href="https://raw.githack.com/rogueyoshi/dbfz-css/master/demo.css"/-->
+  <link rel="stylesheet" href="dbfz/overlay.css"/>
 </svelte:head>
 
 <script context="module">
+  import { updateFetch } from 'components/api/v0.svelte';
 
+  export async function preload(page, session) {
+    updateFetch(this.fetch);
+  }
 </script>
 
 <script>
+  import { getName, getStatus, getSong } from 'components/api/v0.svelte';
+  import Window from 'components/dbfz/Window.svelte';
 
+  const pollingRate = 1000;
+
+  let name, updateName, updateNameHandle;
+
+  (updateName = async () => {
+    name = await getName();
+    updateNameHandle = setTimeout(updateName, pollingRate);
+  })();
+
+  let status, updateStatus, updateStatusHandle;
+
+  (updateStatus = async () => {
+    status = await getStatus();
+    updateStatusHandle = setTimeout(updateStatus, pollingRate);
+  })();
+
+  let song, updateSong, updateSongHandle;
+
+  (updateSong = async () => {
+    song = await getSong();
+    updateSongHandle = setTimeout(updateSong, pollingRate);
+  })();
 </script>
 
 <style>
-  .content {
-    display: grid;
-    grid-template-areas:
-      "game camera"
-      "game chat"
-      "status gamepad";
-    grid-template-columns: 80% 20%;
-    grid-template-rows: 20% 60% 20%;
+  /* use :global() selector to target Svelte components */
+
+  ul {
+    list-style-type: none;
+    padding-left: 2em;
   }
 
-  .game {
-    grid-area: game;
-  }
-
-  .status {
-    grid-area: status;
-  }
-
-  .camera {
-    grid-area: camera;
-  }
-
-  .chat {
-    grid-area: chat;
-  }
-
-  .gamepad {
-    grid-area: gamepad;
-  }
-
-  .dbfz-window .top-left {
-    width: calc(100% / 3);
-    margin-left: 6px;
-    padding-right: 12px;
+  .bottom-right {
+    text-align: right;
   }
 </style>
 
-<div class="dbfz-text-secondary content">
-  <div class="game">
+<Window>
+  <h1 class="dbfz-window-title">{name}</h1>
+  <div class="window-inner">
+    <ul class="top-right dbfz-color-yellow">
+      <li class="dbfz-selected">Test</li>
+      <li>Test</li>
+    </ul>
+    <p class="bottom-left">{status}</p>
+    <p class="bottom-right">{song}</p>
   </div>
-  <div class="status dbfz-window">
-    <h1 class="top-left dbfz-window-title">rogueyoshi</h1>
-    <h4 id="stream-title" class="bottom-left">Testing</h4>
-    <h6 class="top-right">
-      <div class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</div>
-      <div>Free Stream VoD Archives ➡ rogueyoshi.com/archives</div>
-      <div>Support the Stream! ➡ rogueyoshi.com/tip</div>
-    </h6>
-    <h6 class="bottom-right"><span id="song-title">testr</span>🎶</h6>
-  </div>
-  <div class="camera dbfz-window dbfz-window-orange">
-  </div>
-  <div class="chat dbfz-window">
-  </div>
-  <div class="gamepad dbfz-window dbfz-window-orange">
-  </div>
-</div>
+</Window>
