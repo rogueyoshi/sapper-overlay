@@ -3,7 +3,8 @@
   "description": "sapper-overlay",
   "version": "0.0.1",
   "scripts": {
-    "dev": "sapper dev",
+    "clean": "rm -rf __sapper__/ && rm -rf src/node_modules/@sapper/",
+    "dev": "npm run clean && sapper dev",
     "build": "sapper build",
     "export": "sapper export",
     "start": "node __sapper__/build",
@@ -21,6 +22,7 @@
     "sapper": "^0.28.0",
     "svelte": "^3.17.3",
     "svelte-loader": "^2.9.0",
+    "vercel-sapper": "^0.43.0",
     "webpack": "^4.7.0",
     "webpack-modules": "^1.0.0"
   }
