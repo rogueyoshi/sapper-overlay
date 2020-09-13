@@ -3,10 +3,9 @@ export async function get(req, res, next) {
 
 	const LastFm = require("lastfm-node-client");
 	const lastFm = new LastFm(LASTFM_APPLICATION_API_KEY);
-	const user = LASTFM_USER_NAME;
 
 	lastFm.userGetRecentTracks({
-		user: user
+		user: LASTFM_USER_NAME
 	},
 	(err, data) => {
 		if (err) {

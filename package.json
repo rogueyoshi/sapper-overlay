@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "clean": "rm -rf __sapper__/ && rm -rf src/node_modules/@sapper/",
-    "dev": "npm run clean && sapper dev",
+    "dev": "npm run clean && vercel env pull && sapper dev",
     "build": "sapper build",
     "export": "sapper export",
     "start": "node __sapper__/build",
