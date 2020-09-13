@@ -7,7 +7,7 @@ const ASSETS = `cache${timestamp}`;
 const to_cache = shell.concat(files);
 const cached = new Set(to_cache);
 
-self.addEventListener('install', event => {
+self.addEventListener(`install`, event => {
 	event.waitUntil(
 		caches
 			.open(ASSETS)
@@ -18,7 +18,7 @@ self.addEventListener('install', event => {
 	);
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener(`activate`, event => {
 	event.waitUntil(
 		caches.keys().then(async keys => {
 			// delete old caches
@@ -31,13 +31,13 @@ self.addEventListener('activate', event => {
 	);
 });
 
-self.addEventListener('fetch', event => {
-	if (event.request.method !== 'GET' || event.request.headers.has('range')) return;
+self.addEventListener(`fetch`, event => {
+	if (event.request.method !== `GET` || event.request.headers.has(`range`)) return;
 
 	const url = new URL(event.request.url);
 
-	// don't try to handle e.g. data: URIs
-	if (!url.protocol.startsWith('http')) return;
+	// don`t try to handle e.g. data: URIs
+	if (!url.protocol.startsWith(`http`)) return;
 
 	// ignore dev server requests
 	if (url.hostname === self.location.hostname && url.port !== self.location.port) return;
@@ -49,16 +49,16 @@ self.addEventListener('fetch', event => {
 	}
 
 	// for pages, you might want to serve a shell `service-worker-index.html` file,
-	// which Sapper has generated for you. It's not right for every
-	// app, but if it's right for yours then uncomment this section
+	// which Sapper has generated for you. It`s not right for every
+	// app, but if it`s right for yours then uncomment this section
 	/*
 	if (url.origin === self.origin && routes.find(route => route.pattern.test(url.pathname))) {
-		event.respondWith(caches.match('/service-worker-index.html'));
+		event.respondWith(caches.match(`/service-worker-index.html`));
 		return;
 	}
 	*/
 
-	if (event.request.cache === 'only-if-cached') return;
+	if (event.request.cache === `only-if-cached`) return;
 
 	// for everything else, try the network first, falling back to
 	// cache if the user is offline. (If the pages never change, you

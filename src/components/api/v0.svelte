@@ -1,5 +1,5 @@
-<script context="module">
-  let endpoint = "/api/v0";
+<script context='module'>
+  let endpoint = `/api/v0`;
   let fetch;
 
   function handleError(error) {

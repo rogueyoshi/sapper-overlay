@@ -1,9 +1,9 @@
 <svelte:head>
-  <!--link rel="stylesheet" href="https://raw.githack.com/rogueyoshi/dbfz-css/master/demo.css"/-->
-  <link rel="stylesheet" href="dbfz/overlay.css"/>
+  <!--link rel='stylesheet' href='https://raw.githack.com/rogueyoshi/dbfz-css/master/demo.css'/-->
+  <link rel='stylesheet' href='dbfz/overlay.css'/>
 </svelte:head>
 
-<script context="module">
+<script context='module'>
   import { updateFetch } from 'components/api/v0.svelte';
 
   export async function preload(page, session) {
@@ -53,13 +53,13 @@
 </style>
 
 <Window>
-  <h1 class="dbfz-window-title">{name}</h1>
-  <div class="window-inner">
-    <ul class="top-right dbfz-color-yellow">
-      <li class="dbfz-selected">Test</li>
+  {#await name then nameText}<h1 class='dbfz-window-title'>{nameText}</h1>{/await}
+  <div class='window-inner'>
+    <ul class='top-right dbfz-color-yellow'>
+      <li class='dbfz-selected'>Test</li>
       <li>Test</li>
     </ul>
-    <p class="bottom-left">{status}</p>
-    <p class="bottom-right">{song}</p>
+    {#await status then statusText}<p class='bottom-left'>{statusText}</p>{/await}
+    {#await song then songText}<p class='bottom-right'>{songText}</p>{/await}
   </div>
 </Window>
