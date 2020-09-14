@@ -53,53 +53,76 @@
     grid-template-rows: 20% 60% 20%;
   }
 
-  :global(.game) {
+  :global(.game-area) {
     grid-area: game;
   }
 
-  :global(.camera) {
+  :global(.camera-area) {
     grid-area: camera;
 
   }
 
-  :global(.chat) {
+  :global(.chat-area) {
     grid-area: chat;
   }
 
-  :global(.status) {
+  :global(.status-area) {
     grid-area: status;
+    position: relative;
   }
 
-  :global(.gamepad) {
-    grid-area: input;
+  :global(.gamepad-area) {
+    grid-area: gamepad;
   }
 
-  .window-inner * {
-    margin: 0;
+  .dbfz-window-title {
+    width: calc(100% / 3);
+    font-size: 3em !important;
   }
 
-  .bottom-right {
+  .status {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0 0 var(--dbfz-window-margin) var(--dbfz-window-margin);
+    text-align: left;
+  }
+
+  .song {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 var(--dbfz-window-margin) var(--dbfz-window-margin) 0;
     text-align: right;
+    color: red;
+  }
+
+  .list {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
   }
 
   ul {
     list-style-type: none;
     padding-left: 2em;
+    text-align: right;
+    color: var(--dbfz-color-yellow);
   }
 </style>
 
-<div class='game'></div>
-<div class='camera'></div>
-<div class='chat'></div>
-<div class='gamepad'></div>
-<Window class='status'>
+<div class='game-area'></div>
+<Window class='dbfz-window-orange camera-area'></Window>
+<Window class='chat-area'></Window>
+<Window class='dbfz-window-orange gamepad-area'></Window>
+<Window class='status-area'>
   {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
-  <div class='window-inner'>
-    <ul class='top-right dbfz-color-yellow'>
-      <li class='dbfz-selected'>Test</li>
-      <li>Test</li>
-    </ul>
-    {#if status}<p class='bottom-left'>{status}</p>{/if}
-    {#if song}<p class='bottom-right'>{song}</p>{/if}
-  </div>
+  <ul class='list'>
+    <li class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</li>
+    <li>Free Stream VoD Archives ➡ rogueyoshi.com/archives</li>
+    <li>Support the Stream! ➡ rogueyoshi.com/tip</li>
+  </ul>
+  {#if status}<p class='status'>{status}</p>{/if}
+  {#if song}<p class='song'>{song}🎵</p>{/if}
 </Window>
