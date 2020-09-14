@@ -1,6 +1,6 @@
 <svelte:head>
   <!--link rel='stylesheet' href='https://raw.githack.com/rogueyoshi/dbfz-css/master/demo.css'/-->
-  <link rel='stylesheet' href='dbfz/overlay.css'/>
+  <link rel='stylesheet' href='overlay.css'/>
 </svelte:head>
 
 <script context='module'>
@@ -76,8 +76,16 @@
     grid-area: gamepad;
   }
 
-  .dbfz-window-title {
+  .name {
     width: calc(100% / 3);
+  }
+
+  .list {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
+    text-align: right;
   }
 
   .status {
@@ -97,19 +105,11 @@
     color: red;
   }
 
-  .list {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
-    text-align: right;
-  }
-
   iframe {
     border: none;
   }
 
-  ul {
+  .dbfz-window ul {
     list-style-type: none;
     padding-left: 2em;
     color: var(--dbfz-color-yellow);
@@ -119,11 +119,11 @@
 <div class='overlay'>
   <div class='game-area'>
   </div>
-  <Window class='dbfz-window-orange camera-area'></Window>
+  <Window class='camera-area dbfz-window-orange'></Window>
   <Window class='chat-area'></Window>
-  <Window class='dbfz-window-orange gamepad-area'></Window>
+  <Window class='gamepad-area dbfz-window-orange'></Window>
   <Window class='status-area'>
-    {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
+    {#if name}<h1 class='name dbfz-window-title'>{name}</h1>{/if}
     <ul class='list'>
       <li class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</li>
       <li>Free Stream VoD Archives ➡ rogueyoshi.com/archives</li>
