@@ -40,26 +40,66 @@
 </script>
 
 <style>
-  /* use :global() selector to target Svelte components */
+  /* Note: You must use the :global() selector to target Svelte components. */
 
-  ul {
-    list-style-type: none;
-    padding-left: 2em;
+  :global(main) {
+    display: grid;
+    grid-template-areas:
+      'game   game   game   game   camera'
+      'game   game   game   game   chat  '
+      'game   game   game   game   chat  '
+      'game   game   game   game   chat  '
+      'status status status status input '
+    ;
+  }
+
+  :global(.game) {
+    grid-area: game;
+  }
+
+  :global(.camera) {
+    grid-area: camera;
+
+  }
+
+  :global(.chat) {
+    grid-area: chat;
+  }
+
+  :global(.status) {
+    grid-area: status;
+  }
+
+  :global(.input) {
+    grid-area: input;
+  }
+
+  .window-inner * {
+    margin: 0;
   }
 
   .bottom-right {
     text-align: right;
   }
+
+  ul {
+    list-style-type: none;
+    padding-left: 2em;
+  }
 </style>
 
-<Window>
-  {#await name then nameText}<h1 class='dbfz-window-title'>{nameText}</h1>{/await}
+<div class='game'></div>
+<div class='camera'></div>
+<div class='chat'></div>
+<div class='input'></div>
+<Window class='status'>
+  {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
   <div class='window-inner'>
     <ul class='top-right dbfz-color-yellow'>
       <li class='dbfz-selected'>Test</li>
       <li>Test</li>
     </ul>
-    {#await status then statusText}<p class='bottom-left'>{statusText}</p>{/await}
-    {#await song then songText}<p class='bottom-right'>{songText}</p>{/await}
+    {#if status}<p class='bottom-left'>{status}</p>{/if}
+    {#if song}<p class='bottom-right'>{song}</p>{/if}
   </div>
 </Window>
