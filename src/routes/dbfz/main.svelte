@@ -42,7 +42,7 @@
 <style>
   /* Note: You must use the :global() selector to target Svelte components. */
 
-  :global(main) {
+  .overlay {
     display: grid;
     grid-template-areas:
       "game camera"
@@ -63,6 +63,7 @@
   }
 
   :global(.chat-area) {
+    display: flex;
     grid-area: chat;
   }
 
@@ -77,7 +78,6 @@
 
   .dbfz-window-title {
     width: calc(100% / 3);
-    font-size: 3em !important;
   }
 
   .status {
@@ -102,27 +102,36 @@
     top: 0;
     right: 0;
     margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
+    text-align: right;
+  }
+
+  iframe {
+    border: none;
   }
 
   ul {
     list-style-type: none;
     padding-left: 2em;
-    text-align: right;
     color: var(--dbfz-color-yellow);
   }
 </style>
 
-<div class='game-area'></div>
-<Window class='dbfz-window-orange camera-area'></Window>
-<Window class='chat-area'></Window>
-<Window class='dbfz-window-orange gamepad-area'></Window>
-<Window class='status-area'>
-  {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
-  <ul class='list'>
-    <li class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</li>
-    <li>Free Stream VoD Archives ➡ rogueyoshi.com/archives</li>
-    <li>Support the Stream! ➡ rogueyoshi.com/tip</li>
-  </ul>
-  {#if status}<p class='status'>{status}</p>{/if}
-  {#if song}<p class='song'>{song}🎵</p>{/if}
-</Window>
+<div class='overlay'>
+  <div class='game-area'>
+  </div>
+  <Window class='dbfz-window-orange camera-area'></Window>
+  <Window class='chat-area'>
+    <!--iframe href='https://chat.restream.io/embed?token=5a17681e-15f9-4b43-b6b2-a909a1eadb72' title></iframe-->
+  </Window>
+  <Window class='dbfz-window-orange gamepad-area'></Window>
+  <Window class='status-area'>
+    {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
+    <ul class='list'>
+      <li class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</li>
+      <li>Free Stream VoD Archives ➡ rogueyoshi.com/archives</li>
+      <li>Support the Stream! ➡ rogueyoshi.com/tip</li>
+    </ul>
+    {#if status}<p class='status'>{status}</p>{/if}
+    {#if song}<p class='song'>{song}🎵</p>{/if}
+  </Window>
+</div>
