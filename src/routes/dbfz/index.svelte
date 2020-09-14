@@ -45,12 +45,12 @@
   :global(main) {
     display: grid;
     grid-template-areas:
-      'game   game   game   game   camera'
-      'game   game   game   game   chat  '
-      'game   game   game   game   chat  '
-      'game   game   game   game   chat  '
-      'status status status status input '
+      "game camera"
+      "game chat"
+      "status gamepad"
     ;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 20% 60% 20%;
   }
 
   :global(.game) {
@@ -70,7 +70,7 @@
     grid-area: status;
   }
 
-  :global(.input) {
+  :global(.gamepad) {
     grid-area: input;
   }
 
@@ -91,7 +91,7 @@
 <div class='game'></div>
 <div class='camera'></div>
 <div class='chat'></div>
-<div class='input'></div>
+<div class='gamepad'></div>
 <Window class='status'>
   {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
   <div class='window-inner'>
