@@ -117,11 +117,10 @@
 </style>
 
 <div class='overlay'>
-  <div class='game-area'>
-  </div>
-  <Window class='camera-area dbfz-window-orange'></Window>
-  <Window class='chat-area'></Window>
-  <Window class='gamepad-area dbfz-window-orange'></Window>
+  <div class='game-area'></div>
+  <Window class='camera-area dbfz-window-orange'/>
+  <Window class='chat-area'/>
+  <Window class='gamepad-area dbfz-window-orange'/>
   <Window class='status-area'>
     {#if name}<h1 class='name dbfz-window-title'>{name}</h1>{/if}
     <ul class='list'>
