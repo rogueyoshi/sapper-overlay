@@ -78,6 +78,7 @@
 
   .name {
     max-width: calc(100% / 3);
+    font-size: 48px;
   }
 
   .list {
@@ -87,6 +88,7 @@
     max-width: calc(100% / 3);
     margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
     text-align: right;
+    font-size: 20px;
   }
 
   .status {
@@ -95,6 +97,7 @@
     left: 0;
     margin: 0 0 var(--dbfz-window-margin) var(--dbfz-window-margin);
     text-align: left;
+    font-size: 20px;
   }
 
   .song {
@@ -103,6 +106,7 @@
     right: 0;
     margin: 0 var(--dbfz-window-margin) var(--dbfz-window-margin) 0;
     text-align: right;
+    font-size: 20px;
     color: red;
   }
 
