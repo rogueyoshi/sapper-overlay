@@ -109,7 +109,7 @@
     border: none;
   }
 
-  .dbfz-window ul {
+  :global(.dbfz-window) ul {
     list-style-type: none;
     padding-left: 2em;
     color: var(--dbfz-color-yellow);
