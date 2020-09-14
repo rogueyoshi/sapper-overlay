@@ -120,9 +120,7 @@
   <div class='game-area'>
   </div>
   <Window class='dbfz-window-orange camera-area'></Window>
-  <Window class='chat-area'>
-    <!--iframe href='https://chat.restream.io/embed?token=5a17681e-15f9-4b43-b6b2-a909a1eadb72' title></iframe-->
-  </Window>
+  <Window class='chat-area'></Window>
   <Window class='dbfz-window-orange gamepad-area'></Window>
   <Window class='status-area'>
     {#if name}<h1 class='dbfz-window-title'>{name}</h1>{/if}
