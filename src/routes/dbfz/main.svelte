@@ -77,13 +77,14 @@
   }
 
   .name {
-    width: calc(100% / 3);
+    max-width: calc(100% / 3);
   }
 
   .list {
     position: absolute;
     top: 0;
     right: 0;
+    max-width: calc(100% / 3);
     margin: var(--dbfz-window-margin) var(--dbfz-window-margin) 0 0;
     text-align: right;
   }
