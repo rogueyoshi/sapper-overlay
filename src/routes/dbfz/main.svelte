@@ -106,10 +106,6 @@
     color: red;
   }
 
-  iframe {
-    border: none;
-  }
-
   :global(.dbfz-window) ul {
     list-style-type: none;
     padding-left: 2em;
