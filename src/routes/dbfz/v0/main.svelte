@@ -13,7 +13,7 @@
 
 <script>
   import { getName, getStatus, getSong } from 'components/api/v0.svelte';
-  import Window from 'components/dbfz/Window.svelte';
+  import Window from 'components/dbfz/v0/Window.svelte';
 
   const pollingRate = 1000;
 
