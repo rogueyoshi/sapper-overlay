@@ -1,6 +1,6 @@
 # sapper-overlay
 
-Stream overlay stack using Sapper, ready for Vercel deployment.
+Stream overlay stack using Sapper (Svelte), ready for Vercel deployment.
 
 ## Demo
 
