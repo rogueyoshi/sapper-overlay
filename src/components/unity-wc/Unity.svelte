@@ -1,5 +1,5 @@
 <svelte:head>
-  <script src='/unity-wc/unity-wc.loader.js'></script>
+  <script src='/unity-wc/unity-wc.loader.js' on:load={onLoad}></script>
 </svelte:head>
 
 <script>
@@ -12,22 +12,26 @@
   export let onError = () => void 0;
 
 
-  onMount(() => {
-    createUnityInstance(
-    document.querySelector(`#unity-canvas`),
+  const onLoad = () => {
+    console.log(`onLoad`, process.browser);
+    if (process.browser)
     {
-      dataUrl: "/unity-wc/unity-wc.data",
-      frameworkUrl: "/unity-wc/unity-wc.framework.js",
-      codeUrl: "/unity-wc/unity-wc.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "rogueyoshi.com",
-      productName: "unity-wc",
-      productVersion: "0.1",
-    },
-    onProgress)
-    .then(onSuccess)
-    .catch(onError);
-  });
+      createUnityInstance(
+      document.querySelector(`#unity-canvas`),
+      {
+        dataUrl: "/unity-wc/unity-wc.data",
+        frameworkUrl: "/unity-wc/unity-wc.framework.js",
+        codeUrl: "/unity-wc/unity-wc.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "rogueyoshi.com",
+        productName: "unity-wc",
+        productVersion: "0.1",
+      },
+      onProgress)
+      .then(onSuccess)
+      .catch(onError);
+    };
+  }
 </script>
 
 <style>
