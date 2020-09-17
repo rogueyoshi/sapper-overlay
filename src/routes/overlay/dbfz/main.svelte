@@ -12,11 +12,10 @@
 </script>
  
 <script>
-  export let url; url;
- 
-  const UPDATE_INTERVAL_MS = 5000;
-
   import { onMount } from 'svelte';
+  import Unity from 'components/unity-wc/Unity.svelte';
+
+  const UPDATE_INTERVAL_MS = 5000;
 
   export let twitchChannel, lastfmTrack;
 
@@ -115,7 +114,7 @@
 </style>
 
 <div class='overlay dbfz-text-secondary'>
-  <div class='game-area'></div>
+  <div class='game-area'><Unity/></div>
   <div class='camera-area dbfz-window dbfz-window-orange'/>
   <div class='chat-area dbfz-window'/>
   <div class='gamepad-area dbfz-window dbfz-window-orange'/>
