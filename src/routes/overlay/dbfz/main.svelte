@@ -1,57 +1,43 @@
 <svelte:head>
-  <!--link rel='stylesheet' href='https://raw.githack.com/rogueyoshi/dbfz-css/master/demo.css'/-->
+  <link rel='stylesheet' href='dbfz-css/dbfz.css'>
   <link rel='stylesheet' href='overlay.css'/>
 </svelte:head>
 
 <script context='module'>
-  import { updateFetch } from 'components/api/v0.svelte';
-
   export async function preload(page, session) {
-    updateFetch(this.fetch);
+    const twitchChannel = await (await this.fetch(`/api/twitch/channel`)).json();
+    const lastfmTrack = await (await this.fetch(`/api/lastfm/track`)).json();
+    return { twitchChannel, lastfmTrack };
   }
 </script>
-
+ 
 <script>
-  import { getName, getStatus, getSong } from 'components/api/v0.svelte';
-  import Window from 'components/dbfz/v0/Window.svelte';
+  export let url; url;
+ 
+  const UPDATE_INTERVAL_MS = 5000;
 
-  const pollingRate = 1000;
+  import { onMount } from 'svelte';
 
-  let name, updateName, updateNameHandle;
+  export let twitchChannel, lastfmTrack;
 
-  (updateName = async () => {
-    name = await getName();
-    updateNameHandle = setTimeout(updateName, pollingRate);
-  })();
+  $: channelName = twitchChannel.display_name || ``;
+  $: channelStatus = twitchChannel.status || ``;
+  $: trackArtist = lastfmTrack.artist[`#text`] || ``;
+  $: trackName = lastfmTrack.name || ``;
 
-  let status, updateStatus, updateStatusHandle;
+  let updateHandle;
 
-  (updateStatus = async () => {
-    status = await getStatus();
-    updateStatusHandle = setTimeout(updateStatus, pollingRate);
-  })();
+  async function updateLoop() {
+    twitchChannel = await (await fetch(`/api/twitch/channel`)).json();
+    lastfmTrack = await (await fetch(`/api/lastfm/track`)).json();
+    updateHandle = setTimeout(updateLoop, UPDATE_INTERVAL_MS);
+  } 
 
-  let song, updateSong, updateSongHandle;
-
-  (updateSong = async () => {
-    song = await getSong();
-    updateSongHandle = setTimeout(updateSong, pollingRate);
-  })();
+  onMount(updateLoop);
 </script>
 
 <style>
   /* Note: You must use the :global() selector to target Svelte components. */
-
-  .overlay {
-    display: grid;
-    grid-template-areas:
-      "game camera"
-      "game chat"
-      "status gamepad"
-    ;
-    grid-template-columns: 80% 20%;
-    grid-template-rows: 20% 60% 20%;
-  }
 
   :global(.game-area) {
     grid-area: game;
@@ -74,6 +60,17 @@
 
   :global(.gamepad-area) {
     grid-area: gamepad;
+  }
+
+  .overlay {
+    display: grid;
+    grid-template-areas:
+      "game camera"
+      "game chat"
+      "status gamepad"
+    ;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 20% 60% 20%;
   }
 
   .name {
@@ -117,19 +114,19 @@
   }
 </style>
 
-<div class='overlay'>
+<div class='overlay dbfz-text-secondary'>
   <div class='game-area'></div>
-  <Window class='camera-area dbfz-window-orange'/>
-  <Window class='chat-area'/>
-  <Window class='gamepad-area dbfz-window-orange'/>
-  <Window class='status-area'>
-    {#if name}<h1 class='name dbfz-window-title'>{name}</h1>{/if}
+  <div class='camera-area dbfz-window dbfz-window-orange'/>
+  <div class='chat-area dbfz-window'/>
+  <div class='gamepad-area dbfz-window dbfz-window-orange'/>
+  <div class='status-area dbfz-window'>
+    <h1 class='name dbfz-window-title'>{channelName}</h1>
     <ul class='list'>
       <li class="dbfz-selected">Free Fighting Game Coaching ➡ rogueyoshi.com/coaching</li>
       <li>Free Stream VoD Archives ➡ rogueyoshi.com/archives</li>
       <li>Support the Stream! ➡ rogueyoshi.com/tip</li>
     </ul>
-    {#if status}<p class='status'>{status}</p>{/if}
-    {#if song}<p class='song'>{song}🎵</p>{/if}
-  </Window>
+    <p class='status'>{channelStatus}</p>
+    <p class='song'>{trackName}🎧</p>
+  </div>
 </div>
