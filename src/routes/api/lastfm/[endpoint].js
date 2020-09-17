@@ -1,5 +1,5 @@
  async function track({ res, lastFm, userName }) {
-	 const user = userName;
+	const user = userName;
 	await lastFm.userGetRecentTracks({ user }, (userGetRecentTracks_err, userGetRecentTracks_data) => {
 		if (userGetRecentTracks_err) {
 			console.warn(userGetRecentTracks_err);
