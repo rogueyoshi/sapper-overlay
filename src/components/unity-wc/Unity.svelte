@@ -1,5 +1,5 @@
 <svelte:head>
-  <script src='/unity-wc/unity-wc.loader.js' on:load={onLoad}></script>
+  <script on:load={onLoad} src='/unity-wc/unity-wc.loader.js'></script>
 </svelte:head>
 
 <script>
@@ -11,12 +11,11 @@
   export let onSuccess = () => void 0;
   export let onError = () => void 0;
 
-
-  const onLoad = () => {
-    console.log(`onLoad`, process.browser);
-    if (process.browser)
-    {
-      createUnityInstance(
+  let unityReady = false;
+  let mountReady = false;
+     
+  function startUnity() {
+    createUnityInstance(
       document.querySelector(`#unity-canvas`),
       {
         dataUrl: "/unity-wc/unity-wc.data",
@@ -30,8 +29,23 @@
       onProgress)
       .then(onSuccess)
       .catch(onError);
-    };
+  };
+
+  function onLoad() {
+    // The external Unity javascript is ready
+    unityReady = true;
+    if (mountReady) {
+      startUnity();
+    }
   }
+
+  onMount(() => {
+    // The canvas is ready
+    mountReady = true;
+    if (unityReady) {
+      startUnity();
+    }
+  });
 </script>
 
 <style>
