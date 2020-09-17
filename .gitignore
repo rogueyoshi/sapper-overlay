@@ -1,9 +1,10 @@
 .DS_Store
-/node_modules/
-/src/node_modules/@sapper/
+node_modules/
+src/node_modules/@sapper/
 yarn-error.log
-/cypress/screenshots/
-/__sapper__/
+cypress/screenshots/
+__sapper__/
 
-.vercel
+.vercel/
 .env
+.vscode/
