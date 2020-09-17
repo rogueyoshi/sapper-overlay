@@ -2,10 +2,13 @@
 
 Stream overlay stack using Sapper (Svelte), ready for Vercel deployment.
 
-Has service integration for Twitch, Last.fm, and more to come.
+Integration for Twitch, Last.fm, and more to come.
 
-For use with Browser Sources in programs like OBS and XSplit.
-
+Use with Browser Source in OBS/XSplit/etc.
 ## Live Demos
 
+### Production
 http://overlay.rogueyoshi.com
+
+### Bleeding Edge
+https://sapper-overlay-8me9s10gr.vercel.app/
