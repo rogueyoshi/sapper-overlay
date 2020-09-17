@@ -13,6 +13,8 @@
 
   let unityReady = false;
   let mountReady = false;
+
+  $: funcReady = (typeof createUnityInstance !== undefined);
      
   function startUnity() {
     createUnityInstance(
@@ -40,9 +42,9 @@
   }
 
   onMount(() => {
-    // The canvas is ready
+    // The canvas or create function is ready
     mountReady = true;
-    if (unityReady) {
+    if (unityReady || funcReady) {
       startUnity();
     }
   });
