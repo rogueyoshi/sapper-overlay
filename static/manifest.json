@@ -1,4 +1,5 @@
 {
-  "display": "minimal-ui",
-  "start_url": "/"
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation":  "landscape"
 }
