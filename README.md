@@ -12,3 +12,6 @@ http://overlay.rogueyoshi.com
 
 ### Bleeding Edge (Unity3D Interop)
 https://sapper-overlay-8me9s10gr.vercel.app/
+
+### Videos
+https://www.youtube.com/playlist?list=PL96QMFORJ1giNK3kKwIPZa9C1BwEnP0yx
