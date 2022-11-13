@@ -1,5 +1,7 @@
 # sapper-overlay
 
+![Screenshot](https://i.imgur.com/5BLDTfx.jpg "Stream Layout Example")
+
 Stream overlay example using Sapper (Svelte), ready for Vercel deployment.
 
 Integration with Twitch, Last.fm, and more to come.
